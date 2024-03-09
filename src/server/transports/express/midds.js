@@ -3,8 +3,8 @@ import sanitize from "sanitize-filename";
 import * as transliteration from "transliteration";
 import errors from "../../../errors.js";
 import utils from "../../../utils.js";
-import utilsMetastocle from "metastocle/src/server/transports/express/midds.js";
-import utilsStoracle from "storacle/src/server/transports/express/midds.js";
+import utilsMetastocle from "metastocle-ms/src/server/transports/express/midds.js";
+import utilsStoracle from "storacle-ms/src/server/transports/express/midds.js";
 const midds = Object.assign({}, utilsMetastocle, utilsStoracle);
 /**
  * Song addition control
@@ -83,7 +83,7 @@ midds.audio = node => {
             if (!await node.hasFile(hash)) {
                 throw err404;
             }
-            if (req.headers['storacle-cache-check']) {
+            if (req.headers['storacle-ms-cache-check']) {
                 return hash == req.query.f ? res.send('') : next(err404);
             }
             const cache = Math.ceil(node.options.file.responseCacheLifetime / 1000);
@@ -135,7 +135,7 @@ midds.cover = node => {
             if (!tags.APIC) {
                 throw err404;
             }
-            if (req.headers['storacle-cache-check']) {
+            if (req.headers['storacle-ms-cache-check']) {
                 return hash == req.query.f ? res.send('') : next(err404);
             }
             const cache = Math.ceil(node.options.file.responseCacheLifetime / 1000);

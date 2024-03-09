@@ -6,69 +6,80 @@ import utils from "../../../utils.js";
 import utilsMetastocle from "metastocle-ms/src/server/transports/express/midds.js";
 import utilsStoracle from "storacle-ms/src/server/transports/express/midds.js";
 const midds = Object.assign({}, utilsMetastocle, utilsStoracle);
+
 /**
  * Song addition control
  */
 midds.songAdditionControl = node => {
-    return async (req, res, next) => {
-        try {
-            if (req.clientAddress != node.address && await node.isAddressTrusted(req.clientAddress)) {
-                return next();
-            }
-            if (!req.body.controlled) {
-                return next();
-            }
-            return midds.approval(node)(req, res, next);
-        }
-        catch (err) {
-            next(err);
-        }
-    };
+  return async (req, res, next) => {
+    try {
+      if (req.clientAddress != node.address && await node.isAddressTrusted(req.clientAddress)) {
+        return next();
+      }
+
+      if (!req.body.controlled) {
+        return next();
+      }
+
+      return midds.approval(node)(req, res, next);
+    }
+    catch (err) {
+      next(err);
+    }
+  };
 };
+
 /**
  * Song removal control
  */
 midds.songRemovalControl = node => {
-    return async (req, res, next) => {
-        try {
-            const title = req.body.title;
-            node.songTitleTest(title);
-            req.document = await node.db.getMusicByPk(title);
-            if (!req.document || req.document.priority < 1) {
-                return next();
-            }
-            return midds.approval(node)(req, res, next);
-        }
-        catch (err) {
-            next(err);
-        }
-    };
+  return async (req, res, next) => {
+    try {
+      const title = req.body.title;
+      node.songTitleTest(title);
+      req.document = await node.db.getMusicByPk(title);
+
+      if (!req.document || req.document.priority < 1) {
+        return next();
+      }
+
+      return midds.approval(node)(req, res, next);
+    }
+    catch (err) {
+      next(err);
+    }
+  };
 };
+
 /**
  * Control file access
  */
 midds.fileAccess = node => {
-    return async (req, res, next) => {
-        try {
-            let doc;
-            if (req.query.f) {
-                const fileHash = String(req.query.f);
-                doc = await node.db.getMusicByFileHash(fileHash);
-            }
-            if (!doc) {
-                const titleHash = String(req.params.hash).split('.')[0];
-                const title = utils.decodeSongTitle(titleHash);
-                doc = await node.db.getMusicByPk(title);
-            }
-            doc && await node.db.accessDocument(doc);
-            req.document = doc;
-            next();
-        }
-        catch (err) {
-            next(err);
-        }
-    };
+  return async (req, res, next) => {
+    try {
+      let doc;
+
+      if (req.query.f) {
+        const fileHash = String(req.query.f);
+        doc = await node.db.getMusicByFileHash(fileHash);
+      }
+
+      if (!doc) {
+        const titleHash = String(req.params.hash).split('.')[0];
+        const title = utils.decodeSongTitle(titleHash);
+        doc = await node.db.getMusicByPk(title);
+      }
+
+      doc && await node.db.accessDocument(doc);
+      req.document = doc;
+      next();
+    }
+    catch (err) {
+      next(err);
+    }
+  };
 };
+
 /**
  * Provide audio receiving
  */
@@ -83,7 +94,7 @@ midds.audio = node => {
             if (!await node.hasFile(hash)) {
                 throw err404;
             }
-            if (req.headers['storacle-ms-cache-check']) {
+            if (req.headers['storacle-cache-check']) {
                 return hash == req.query.f ? res.send('') : next(err404);
             }
             const cache = Math.ceil(node.options.file.responseCacheLifetime / 1000);
@@ -119,6 +130,7 @@ midds.audio = node => {
         }
     };
 };
+
 /**
  * Provide covers receiving
  */
@@ -135,7 +147,7 @@ midds.cover = node => {
             if (!tags.APIC) {
                 throw err404;
             }
-            if (req.headers['storacle-ms-cache-check']) {
+            if (req.headers['storacle-cache-check']) {
                 return hash == req.query.f ? res.send('') : next(err404);
             }
             const cache = Math.ceil(node.options.file.responseCacheLifetime / 1000);
@@ -156,16 +168,19 @@ midds.cover = node => {
  * Control song requests limit by a title and hash
  */
 midds.requestQueueSong = (node) => {
-    return async (req, res, next) => {
-        const options = { limit: 1, fnHash: key => key };
-        const title = String(req.query.title ? req.query.title : req.body.title);
-        const arr = [title];
-        for (let key in node.__requestQueue) {
-            if (utils.getSongSimilarity(key, title) >= node.options.music.similarity) {
-                arr.push(key);
-            }
-        }
-        return midds.requestQueue(node, arr, options)(req, res, next);
-    };
+  return async (req, res, next) => {
+    const options = { limit: 1, fnHash: key => key };
+    const title = String(req.query.title ? req.query.title : req.body.title);
+    const arr = [title];
+    
+    for (let key in node.__requestQueue) {
+      if (utils.getSongSimilarity(key, title) >= node.options.music.similarity) {
+        arr.push(key);
+      }
+    }
+
+    return midds.requestQueue(node, arr, options)(req, res, next);
+  };
 };
+
 export default midds;

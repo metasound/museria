@@ -111,6 +111,7 @@
       text-transform: uppercase;
       font-weight: bold;
       text-align: center;
+      max-width: 50%;
 
       & b {
         color: $light;
@@ -123,7 +124,7 @@
       text-transform: uppercase;
       font-weight: bold;
       text-decoration: none;
-      
+      width: unset;
 
       &-img {
         display: inline-block;
@@ -223,10 +224,6 @@
         color: $light;
         z-index: 1;
 
-        &.song-search-loading {
-          margin-top: -0.37em;
-        }
-
         &.song-search-close {
           right: 0.7em;
           left: unset;
@@ -247,27 +244,6 @@
           z-index: 0;
         }
       }
-    }
-  }
-
-  .cover-img {
-    object-fit: cover;
-    height: 2.22em;
-    width: 2.22em;
-    position: absolute;
-    left: 2px;
-    top: 1px;
-    z-index: 2;
-    pointer-events: none;
-  }
-
-  .cover-remove {
-    right: 4.5em;
-  }
-
-  .cover-label {
-    &.with-img {
-      padding-left: 3em;
     }
   }
 

@@ -1,0 +1,325 @@
+@import '../../styles/vars-ms.scss';
+
+.app {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+
+  .wmodal {
+    &-overlay {
+      position: fixed;
+      z-index: 11000;
+      top: 0;
+      left: 0;
+      background: rgba($night, 0.8);
+      height: 100vh;
+      width: 100%;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-close {
+      cursor: pointer;
+      position: absolute;
+      top: 0.5em;
+      right: 0.55em;
+      opacity: 0.4;
+      color: $gray;
+      font-size: 1.8em;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    &-body {
+      cursor: default;
+      position: relative;
+      box-sizing: border-box;
+      padding: 3.5em 2.5em;
+      background: black;
+      box-shadow: 0px 0px 4px 2px rgba($gray, 0.6);
+    }
+  }
+
+  .upload-events {
+    .wmodal-close {
+      font-size: 2em;
+      top: 50%;
+      right: 1em;
+      transform: translateY(-50%);
+    }
+
+    .wmodal-body {
+      padding: 2em 5em 2em 2em;
+      word-break: break-all;
+
+      &.danger {
+        box-shadow: 0px 0px 4px 2px rgba($red, 0.6);
+      }
+
+      &.success {
+        box-shadow: 0px 0px 4px 2px rgba($purple, 0.6);
+      }
+    }
+  }
+
+  .finding-list {
+    &>* {
+      display: block;
+
+      &:not(:first-child) {
+        margin-top: 0.5em;
+      }
+    }
+  }
+
+  .captcha {
+    & input {
+      width: 240px;
+      border-color: $dark;
+      background: $latenight;
+
+      &:focus {
+        border-color: $gray;
+        background: $latenight;
+      }
+    }
+
+    &-preloader {
+      text-align: center;
+      color: $gray;
+      font-size: 1.7em;
+    }
+  }
+
+  & .header {
+    position: relative;
+    //background: #333;
+    //background: radial-gradient(#66666673, #46464670, #33333376);
+    padding: 4em 0 6.6em 0;
+    text-shadow: 0px 0px 0.8em #333;
+
+    & .songs-counter-text {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 1.5em;
+      color: $gray;
+      text-transform: uppercase;
+      font-weight: bold;
+      text-align: center;
+      max-width: 50%;
+
+      & b {
+        color: $light;
+      }
+    }
+
+    & .logo {
+      display: flex;
+      font-family: Archivo;
+      text-transform: uppercase;
+      font-weight: bold;
+      text-decoration: none;
+      width: unset;
+
+      &-img {
+        display: inline-block;
+        vertical-align: middle;
+        width: 25em;
+      }
+
+      &-title {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 3em;
+        color: white;
+        letter-spacing: 0.05em;
+        margin-left: 0.1em;
+      }
+
+      &-description-start {
+        font-size: 2em;
+        color: $yellow;
+        letter-spacing: 0.07em;
+        margin-top: -0.3em;
+        margin-left: 0.1em;
+      }
+
+      &-description-end {
+        font-size: 1.65em;
+        color: $blue;
+        letter-spacing: 0.03em;
+        margin-top: 0.5em;
+      }
+
+      &-description-end-lg {
+        font-size: 3.6em;
+        color: $yellow;
+        letter-spacing: 0.06em;
+        margin-top: -0.2em;
+      }
+    }
+  }
+
+  & .content {
+    flex: 1;
+  }
+
+  & .footer {
+    //background: #333;
+    //background: radial-gradient(#555, #424242, #333);
+    padding: 1.5em 0 3em 0;
+    color: $pale;
+
+    & h5 {
+      text-transform: uppercase;
+      font-weight: bold;
+      color: $yellow;
+      margin-bottom: 0.6em;
+      opacity: 0.7;
+      text-shadow: 0px 0px 1em #000;
+    }
+
+    & a {
+      color: $pale;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    & ul.nav {
+      &>li {
+        word-break: break-all;
+        line-height: 1.8em;
+        font-size: 0.9em;
+      }
+    }
+  }
+
+  & .song-search {
+    .alert.alert-success a {
+      color: #aed3b7;
+      text-decoration: none;
+
+      &:hover {
+        color: $blue;
+      }
+    }
+
+    &-input {
+      position: relative;
+
+      &>i {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0.7em;
+        color: $light;
+        z-index: 1;
+
+        &.song-search-close {
+          right: 0.7em;
+          left: unset;
+          opacity: 0.6;
+          cursor: pointer;
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+
+      &>input {
+        padding-left: 2.5em;
+        padding-right: 2em;
+
+        &:focus {
+          z-index: 0;
+        }
+      }
+    }
+  }
+
+  .upload-preloader-btn {
+    & i {
+      margin-left: 0.3em;
+      margin-top: -0.1em;
+      vertical-align: middle;
+      font-size: 1.4em;
+      color: $pale;
+    }
+  }
+
+  .song-priority {
+    font-size: 0.9em;
+  }
+
+  .image-link {
+    display: inline-flex;
+    flex-direction: row;
+    text-decoration: none;
+    color: white;
+    align-items: center;
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &-pic {
+      font-size: 3em;
+    }
+
+    &-title {
+      margin-left: 0.5em;
+      font-size: 3em;
+      text-transform: uppercase;
+    }
+  }
+
+  #audio-file {
+    left: -10000px;
+  }
+
+  .questions {
+    margin: 0;
+    list-style: none;
+    display: inline-block;
+    text-align: left;
+
+    &>li {
+      opacity: 0.9;
+
+      &:not(:last-child) {
+        margin-bottom: 2em;
+      }
+
+      &>*:first-child {
+        font-size: 1.5em;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: white;
+      }
+
+      &>*:last-child {
+        font-size: 1.4em;
+        color: $pale;
+
+        &:before {
+          content: "↵";
+          display: inline-block;
+          transform: scaleX(-1);
+          font-weight: bold;
+          color: lighten($purple, 30%);
+          margin: 0 0.4em 0 0;
+        }
+      }
+    }
+  }
+}

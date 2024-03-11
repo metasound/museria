@@ -1,4 +1,4 @@
-<div class="app container-fluid">
+<div class="app container">
   <if recreate is="${ this.showCaptcha }" class="captcha wmodal">
     <div class="wmodal-overlay" on-mousedown="${ this.showCaptcha = false }">
       <div class="wmodal-body" on-mousedown="${ event.stopPropagation(); }">
@@ -43,18 +43,18 @@
       There ${this.songsCount == 1? 'is': 'are'} <b>${ Number(this.songsCount).toLocaleString() }</b>
       song${this.songsCount == 1? '': 's'} on the network
     </div>
-    <a state="app" class="logo mx-auto px-4">
+    <a state="app" class="d-flex flex-column logo mx-auto px-4">
       <div>
-        <img src="./img/logo.svg" class="logo-img">
-        <span class="logo-title">museria</span>
-        <div class="logo-description-start">decentralized</div>
-        <div class="logo-description-end-lg d-lg-none">storage</div>
+        <img src="./img/logo-ms.png" class="logo-img">
+        <!-- <span class="logo-title">Metasound</span> -->
+        <!-- <div class="logo-description-start">decentralized</div> -->
+        <!-- <div class="logo-description-end d-lg-none">storage</div> -->
       </div>
-      <div class="logo-description-end d-none d-lg-block">storage</div>
+      <div class="logo-description-end d-none d-lg-block">Descentralized Storage</div>
     </a>
   </header>
-  <div class="content">
-    <div class="row px-4 px-sm-5 pt-5 pb-3">
+  <div class="content px-5">
+    <div class="row px-4 px-sm-5">
       <div class="song-search col-lg-6 col-12 pl-5 pr-5 pr-lg-4 pt-4">
         <div class="song-search-input input-group input-group-lg">
           <i hidden="${ this.isFinding }" class="fas fa-search fa-lg"></i>
@@ -158,7 +158,7 @@
         </div>
       </div>
     </div>
-    <div class="container py-4">
+    <!-- <div class="container py-4">
       <div class="row px-2 pb-5">
         <div class="col-12 text-center">
           <ul class="questions px-0">
@@ -173,14 +173,14 @@
             <li>
               <div>What network?</div>
               <div>If you are here and don’t know it, then this is most likely
-                <a href="https://github.com/ortexx/museria-global/" target="_blank">a global storage network</a>.
+                <a href="https://github.com/metasound/museria-global/" target="_blank">a global storage network</a>.
                 But it could be another one.
               </div>
             </li>
             <li>
               <div>Global storage network?</div>
               <div>
-                Yes, <a href="https://github.com/ortexx/museria-global/" target="_blank">a global decentralized
+                Yes, <a href="https://github.com/metasound/museria-global/" target="_blank">a global decentralized
                   network</a>
                 has been launched, that allows us all to store and receive music for free and in a single place.
               </div>
@@ -201,7 +201,7 @@
             <li>
               <div>How to learn more about all this?</div>
               <div>
-                Look into <a href="https://github.com/ortexx/museria/" target="_blank">the documentation</a> of the
+                Look into <a href="https://github.com/metasound/museria/" target="_blank">the documentation</a> of the
                 library that is responsible for everything.
                 If you are not a programmer then find out the details from the person who gave you the link to the site.
               </div>
@@ -209,47 +209,47 @@
           </ul>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
   <footer class="footer row">
     <div>
       <div class="container">
         <div class="row px-4">
-          <div class="col-xl-4 col-lg-6 mt-4 px-0 footer-contacts">
+          <div class="col-xl-6 col-lg-6 mt-4 px-0 footer-contacts" align="center">
             <h5>Contacts</h5>
             <ul class="flex-column nav">
               <li>
                 <i class="fas fa-envelope" aria-hidden="true"></i>
-                <a href="mailto:storage@museria.com" target="_blank">
-                  <span class="pl-1">storage@museria.com</span>
+                <a href="mailto:info@metasound.us" target="_blank">
+                  <span class="pl-1">info@metasound.us</span>
                 </a>
               </li>
               <li>
                 <i class="fab fa-github" aria-hidden="true"></i>
-                <a href="https://github.com/ortexx/" target="_blank">
-                  <span class="pl-1">ortexx</span>
+                <a href="https://github.com/metasound/" target="_blank">
+                  <span class="pl-1">Metasound</span>
                 </a>
               </li>
             </ul>
           </div>
-          <div class="col-xl-4 col-lg-6 mt-4 px-0">
+          <div class="col-xl-6 col-lg-6 mt-4 px-0" align="center">
             <h5>Information</h5>
             <ul class="flex-column nav">
               <li>
                 <i class="fas fa-book-open" aria-hidden="true"></i>
-                <a href="https://github.com/ortexx/museria/" target="_blank">Documentation</a>
+                <a href="https://github.com/metasound/museria/" target="_blank">Documentation</a>
               </li>
               <li>
                 <i class="fas fa-globe" aria-hidden="true"></i>
-                <a href="https://github.com/ortexx/museria-global/" target="_blank">Global network</a>
+                <a href="https://github.com/metasound/museria-global/" target="_blank">Storage</a>
               </li>
               <li>
                 <i class="fas fa-play-circle" aria-hidden="true"></i>
-                <a href="https://github.com/ortexx/musiphone/" target="_blank">Decentralized player</a>
+                <a href="https://github.com/metasound/musiphone/" target="_blank">Player</a>
               </li>
             </ul>
           </div>
-          <div class="col-xl-4 col-lg-6 mt-4 px-0">
+          <!-- <div class="col-xl-4 col-lg-6 mt-4 px-0">
             <h5>Donate</h5>
             <ul class="flex-column nav">
               <li>
@@ -261,7 +261,7 @@
                 <span>0x4e5Ef1b362271523f5c6eDe7a54BDcA9750D81E8</span>
               </li>
             </ul>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

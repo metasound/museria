@@ -40,11 +40,12 @@ body {
 
 .bg {
   position: absolute;
-  filter: blur(150px);
   height: 100%;
   width: 100%;
   z-index: -1;
   background-image: url("../controllers/app/img/bg-ms.jpg");
+  background-size: cover;
+  filter: blur(40px);
 }
 
 .custom-file {
